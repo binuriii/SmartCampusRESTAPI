@@ -7,11 +7,17 @@ package com.mycompany.smartcampusrestapi.resources;
 import com.mycompany.smartcampus.model.Room;
 import com.mycompany.smartcampus.model.Sensor;
 import com.mycompany.smartcampus.repo.MockDatabase;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -48,5 +54,25 @@ public class SensorResource {
                 .entity(sensor)
                 .type(MediaType.APPLICATION_JSON)
                 .build();
+    
     }
+    
+    // GET /sensors (with optional filter)
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSensors(@QueryParam("type") String type) {
+
+        List<Sensor> result = new ArrayList<>();
+
+        for (Sensor sensor : sensors.values()) {
+            if (type == null || sensor.getType().equalsIgnoreCase(type)) {
+                result.add(sensor);
+            }
+        }
+
+        return Response.ok(result).build();
+    }
+
+    
+
 }
