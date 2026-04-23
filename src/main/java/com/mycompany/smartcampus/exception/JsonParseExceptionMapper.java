@@ -4,6 +4,8 @@
  */
 package com.mycompany.smartcampus.exception;
 
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.mycompany.smartcampus.dto.ErrorResponse;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;

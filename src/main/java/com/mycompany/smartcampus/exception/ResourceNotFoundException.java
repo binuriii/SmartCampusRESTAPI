@@ -8,6 +8,9 @@ package com.mycompany.smartcampus.exception;
  *
  * @author binuripiyathma
  */
-public class ResourceNotFoundException {
-    
+
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
 }

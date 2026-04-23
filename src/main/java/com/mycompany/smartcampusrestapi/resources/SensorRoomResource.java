@@ -4,6 +4,8 @@
  */
 package com.mycompany.smartcampusrestapi.resources;
 
+import com.mycompany.smartcampus.exception.ResourceNotFoundException;
+import com.mycompany.smartcampus.exception.RoomNotEmptyException;
 import com.mycompany.smartcampus.model.Room;
 import com.mycompany.smartcampus.model.Sensor;
 import com.mycompany.smartcampus.repo.MockDatabase;

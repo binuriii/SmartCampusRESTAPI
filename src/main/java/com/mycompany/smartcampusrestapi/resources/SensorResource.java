@@ -4,6 +4,7 @@
  */
 package com.mycompany.smartcampusrestapi.resources;
 
+import com.mycompany.smartcampus.exception.LinkedResourceNotFoundException;
 import com.mycompany.smartcampus.model.Room;
 import com.mycompany.smartcampus.model.Sensor;
 import com.mycompany.smartcampus.repo.MockDatabase;
