@@ -28,7 +28,7 @@ public class DiscoveryResource {
 
         Map<String, String> resources = new HashMap<>();
         resources.put("rooms", "/api/v1/rooms");
-        resources.put("students", "/api/v1/students");
+        resources.put("sensors", "/api/v1/sensors");
 
         DiscoveryResponse response = new DiscoveryResponse(
                 "v1",
