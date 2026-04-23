@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -29,7 +30,7 @@ public class SensorRoomResource {
     
     private static Map<String, Room> rooms = MockDatabase.ROOMS;
     private static Map<String, Sensor> sensors = MockDatabase.SENSORS;
-    private Object sensorld;
+    private Object sensorId;
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -46,9 +47,9 @@ public class SensorRoomResource {
         String id = UUID.randomUUID().toString();
         room.setId(id);
 
-        if (room. getSensorIds()!= null) {
+        if (room.getSensorIds()!= null) {
             for (String sensorId : room.getSensorIds()) {
-                if (!sensors. containsKey(sensorld)) {
+                if (!sensors.containsKey(sensorId)) {
                     
                     throw new ResourceNotFoundException("Sensor ID not found: " + sensorId);
                 }
@@ -81,8 +82,23 @@ public class SensorRoomResource {
         return Response.ok(room).build();
     }
     
+    @DELETE
+    @Path("/{roomId}")
+    public Response deleteRoom(@PathParam("roomId") String roomId) {
 
+        Room room = rooms.get(roomId);
 
+        if (room == null) {
+            throw new ResourceNotFoundException("Room not found");
+        }
 
+        // BUSINESS RULE
+        if (room.getSensorIds() != null && !room.getSensorIds().isEmpty()) {
+            throw new RoomNotEmptyException("Room has active sensors and cannot be deleted");
+        }
 
+        rooms.remove(roomId);
+
+        return Response.ok("Room deleted successfully").build();
+    }
 }
